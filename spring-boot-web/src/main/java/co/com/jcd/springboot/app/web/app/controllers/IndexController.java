@@ -1,17 +1,17 @@
 package co.com.jcd.springboot.app.web.app.controllers;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller // clase controlador para manejar las peticiones del usuario desde el front
 public class IndexController {
 	
 	@GetMapping({"/index","/","/home"})
-	public String index(Map<String, Object> map) { // usando un mapa de Java, que es equivalente
-		map.put("titulo", "Hola SpringFramework con un Map!!");
-		return "index"; 
+	public ModelAndView index(ModelAndView mv) { // usando ModelAndView
+		mv.addObject("titulo", "Hola SpringFramework con ModelAndView!!");
+		mv.setViewName("index");
+		return mv; 
 	}
 	
 	

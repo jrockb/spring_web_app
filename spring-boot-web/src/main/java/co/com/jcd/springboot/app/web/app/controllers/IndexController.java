@@ -1,31 +1,29 @@
 package co.com.jcd.springboot.app.web.app.controllers;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller // clase controlador para manejar las peticiones del usuario desde el front
 public class IndexController {
 	
-	// metodos de accion o handlers que manejan peticiones http
+	@GetMapping({"/index","/","/home"})
+	public String index(Map<String, Object> map) { // usando un mapa de Java, que es equivalente
+		map.put("titulo", "Hola SpringFramework con un Map!!");
+		return "index"; 
+	}
 	
-	@GetMapping({"/index","/","/home"}) // el metodo está mapeado a estas tres rutas
-	public String index(Model model) { // model permitira pasarle argumentos a la vista
+	
+	/**
+	 * @GetMapping({"/index","/","/home"}) // el metodo está mapeado a estas tres rutas
+	public String index(ModelMap model) { // ModelMap es equivalente a Model
 		model.addAttribute("titulo","hola Spring Framework"); // titulo es el atributo
 		return "index"; // retorna el nombre de la vista
 	}
 	
-	/** otras formas equivalentes:
-	 * @RequestMapping(value="/index") // http://localhost:8080/index -> por defecto es GET
-		public String index() {
-			return "index"; // retorna el nombre de la vista
-		}
-		
-		@RequestMapping(value="/index", method=RequestMethod.GET )
-		public String index() {
-			return "index"; 
-		}
-
 	 */
+	
+	
 
 }

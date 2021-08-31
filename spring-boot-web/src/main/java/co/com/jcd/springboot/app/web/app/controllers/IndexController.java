@@ -3,29 +3,31 @@ package co.com.jcd.springboot.app.web.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import co.com.jcd.springboot.app.web.app.models.Usuario;
 
 @Controller // clase controlador para manejar las peticiones del usuario desde el front
-public class IndexController {
+@RequestMapping("/app") // ruta padre o de primer nivel, p.e. http://localhost:8080/app/index 
+public class IndexController {	
 	
-	// metodos de accion o handlers que manejan peticiones http
-	
-	@GetMapping({"/index","/","/home"}) // el metodo está mapeado a estas tres rutas
-	public String index(Model model) { // model permitira pasarle argumentos a la vista
-		model.addAttribute("titulo","hola Spring Framework"); // titulo es el atributo
-		return "index"; // retorna el nombre de la vista
+	@GetMapping({"/index","/","/home"}) 
+	public String index(Model model) { 
+		model.addAttribute("titulo","hola Spring Framework");
+		return "index";
 	}
 	
-	/** otras formas equivalentes:
-	 * @RequestMapping(value="/index") // http://localhost:8080/index -> por defecto es GET
-		public String index() {
-			return "index"; // retorna el nombre de la vista
-		}
-		
-		@RequestMapping(value="/index", method=RequestMethod.GET )
-		public String index() {
-			return "index"; 
-		}
-
-	 */
+	// ejemplo para enviar dato (modelo) desde el controlador a la vista
+	@RequestMapping("/perfil")
+	public String perfil(Model model) {
+		Usuario usuario = new Usuario();
+		usuario.setNombre("Fulanito");
+		usuario.setApellido("De tal");
+		usuario.setEmail("fulanito@correo.com");
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("titulo","perfil del usuario: ".concat(usuario.getNombre()));
+		return "perfil";		
+	}
+	
 
 }

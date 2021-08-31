@@ -1,6 +1,7 @@
 package co.com.jcd.springboot.app.web.app.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller // clase controlador para manejar las peticiones del usuario desde el front
@@ -9,7 +10,8 @@ public class IndexController {
 	// metodos de accion o handlers que manejan peticiones http
 	
 	@GetMapping({"/index","/","/home"}) // el metodo está mapeado a estas tres rutas
-	public String index() {
+	public String index(Model model) { // model permitira pasarle argumentos a la vista
+		model.addAttribute("titulo","hola Spring Framework"); // titulo es el atributo
 		return "index"; // retorna el nombre de la vista
 	}
 	

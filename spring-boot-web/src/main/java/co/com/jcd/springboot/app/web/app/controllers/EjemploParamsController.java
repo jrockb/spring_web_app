@@ -1,5 +1,7 @@
 package co.com.jcd.springboot.app.web.app.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,5 +32,20 @@ public class EjemploParamsController {
 				+ "' y el número es: '"+numero+"' ");
 		return "params/ver"; 
 	}
+	
+	// otra forma enviando directamente el objeto HttpServletRequest
+		@GetMapping("/mix-params-request")
+		public String param(HttpServletRequest request, Model model) { 
+			String saludo  = request.getParameter("saludo"); // se indica el nombre del parametro enviado
+			Integer numero = null;
+			try {
+				numero = Integer.parseInt(request.getParameter("numero")); // porque getParameter devuelve un String
+			} catch(NumberFormatException e) {
+				numero = 0; // ejemplo
+			}				
+			model.addAttribute("resultado", "El Saludo enviado es: '" + saludo 
+					+ "' y el número es: '"+numero+"' ");
+			return "params/ver"; 
+		}
 
 }

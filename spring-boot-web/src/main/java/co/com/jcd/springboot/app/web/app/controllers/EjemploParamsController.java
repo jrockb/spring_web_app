@@ -34,18 +34,18 @@ public class EjemploParamsController {
 	}
 	
 	// otra forma enviando directamente el objeto HttpServletRequest
-		@GetMapping("/mix-params-request")
-		public String param(HttpServletRequest request, Model model) { 
-			String saludo  = request.getParameter("saludo"); // se indica el nombre del parametro enviado
-			Integer numero = null;
-			try {
-				numero = Integer.parseInt(request.getParameter("numero")); // porque getParameter devuelve un String
-			} catch(NumberFormatException e) {
-				numero = 0; // ejemplo
-			}				
-			model.addAttribute("resultado", "El Saludo enviado es: '" + saludo 
-					+ "' y el número es: '"+numero+"' ");
-			return "params/ver"; 
-		}
+	@GetMapping("/mix-params-request")
+	public String param(HttpServletRequest request, Model model) { 
+		String saludo  = request.getParameter("saludo"); // se indica el nombre del parametro enviado
+		Integer numero = null;
+		try {
+			numero = Integer.parseInt(request.getParameter("numero")); // porque getParameter devuelve un String
+		} catch(NumberFormatException e) {
+			numero = 0; // ejemplo
+		}				
+		model.addAttribute("resultado", "El Saludo enviado es: '" + saludo 
+				+ "' y el número es: '"+numero+"' ");
+		return "params/ver"; 
+	}
 
 }

@@ -3,6 +3,7 @@ package co.com.jcd.springboot.app.web.app.controllers;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,18 @@ import co.com.jcd.springboot.app.web.app.models.Usuario;
 
 @Controller // clase controlador para manejar las peticiones del usuario desde el front
 @RequestMapping("/app") // ruta padre o de primer nivel, p.e. http://localhost:8080/app/index 
-public class IndexController {	
+public class IndexController {
+	
+	@Value("${texto.indexcontroller.index.titulo}") // para obtener un String de una ubicación por ejemplo del appliocation.properties
+	private String textoIndex;
+	@Value("${texto.indexcontroller.perfil.titulo}")
+	private String textoPerfil;
+	@Value("${texto.indexcontroller.listar.titulo}")
+	private String textoListar;
 	
 	@GetMapping({"/index","/","/home"}) 
 	public String index(Model model) { 
-		model.addAttribute("titulo","hola Spring Framework");
+		model.addAttribute("titulo", textoIndex);
 		return "index";
 	}
 	
@@ -29,14 +37,14 @@ public class IndexController {
 		usuario.setApellido("De tal");
 		usuario.setEmail("fulanito@correo.com");
 		model.addAttribute("usuario", usuario);
-		model.addAttribute("titulo","perfil del usuario: ".concat(usuario.getNombre()));
+		model.addAttribute("titulo",textoPerfil.concat(usuario.getNombre()));
 		return "perfil";		
 	}
 	
 	// ejemplo con una lista de perfiles
 	@RequestMapping("/listar")
 	public String listar(Model model) {
-		model.addAttribute("titulo","Listado de usuarios");
+		model.addAttribute("titulo","textoListar");
 		return "listar";		
 	}
 	

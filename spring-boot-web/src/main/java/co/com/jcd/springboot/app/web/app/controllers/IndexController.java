@@ -44,7 +44,7 @@ public class IndexController {
 	// ejemplo con una lista de perfiles
 	@RequestMapping("/listar")
 	public String listar(Model model) {
-		model.addAttribute("titulo","textoListar");
+		model.addAttribute("titulo",textoListar);
 		return "listar";		
 	}
 	
